@@ -1,2 +1,3 @@
+entity1<##DELIMIT##>And we can write to it too!
 entity1<##DELIMIT##>AYY WHATS UP
 entity2<##DELIMIT##>A test for a test, huh...

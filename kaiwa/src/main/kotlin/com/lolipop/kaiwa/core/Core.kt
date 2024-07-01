@@ -1,5 +1,6 @@
 package com.lolipop.kaiwa.core
 
+import com.lolipop.kaiwa.data.Message
 import java.io.File
 
 fun String.toMessage(): Message {
@@ -11,7 +12,8 @@ class Core(private val path: String, private val file: File = File(path)) {
     fun readFromFrozen(howMany: Int = -1, func: (List<Message>) -> Unit) {
         val entries = file.useLines { it.toList() }
         val messages =  if(howMany < 0) entries.map { it.toMessage() }
-                        else (0..howMany).map { entries[it].toMessage() }
+                        else (0..< if (entries.size < howMany) entries.size else howMany)
+                            .map { entries[it].toMessage() }
         func(messages)
     }
 
@@ -20,15 +22,10 @@ class Core(private val path: String, private val file: File = File(path)) {
             val curated = mutableListOf<Message>()
             curated.addAll(entry)
             curated.addAll(cached)
-            println(curated)
             file.writeText(
                 curated.map { it.toString() }
                        .reduce { acc, bit -> "$acc\n$bit" }
             )
         }
     }
-}
-
-data class Message(val id: String, val content: String) {
-    override fun toString() = "$id<##DELIMIT##>$content"
 }
