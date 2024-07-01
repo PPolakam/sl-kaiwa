@@ -11,6 +11,8 @@ down the line is in need of such functionality.
 I also took the opportunity to test some structure ideas. Data classes in Kotlin make POJOs really easy to make, so I experimented with writing
 one file for the model, service, and controller.
 
+_As a side note, the name "kaiwa" is from the Japanese "会話", meaning "conversation"._
+
 ## v0.0.1
 
 The API includes the following operations:
